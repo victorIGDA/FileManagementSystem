@@ -1,0 +1,8 @@
+.env
+/storage/audio/*
+!/storage/audio/.gitkeep
+/storage/profiles/*
+!/storage/profiles/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+

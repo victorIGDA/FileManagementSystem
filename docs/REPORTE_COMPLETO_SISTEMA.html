@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reporte completo — Sistema Gestor de Archivos de Audio</title>
+<style>
+@page{size:A4;margin:18mm 16mm 18mm}*{box-sizing:border-box}body{margin:0;color:#16263a;background:#eef3f8;font:15px/1.58 "Segoe UI",Arial,sans-serif}.report{max-width:980px;margin:28px auto;background:#fff;box-shadow:0 18px 55px #16365420}.cover{min-height:920px;padding:72px 70px;display:flex;flex-direction:column;justify-content:center;color:#fff;background:linear-gradient(145deg,#062947,#0c4c86 62%,#1674d1);position:relative;overflow:hidden}.cover:before,.cover:after{content:"";position:absolute;border-radius:50%;border:1px solid #ffffff26}.cover:before{width:430px;height:430px;right:-180px;top:-120px}.cover:after{width:310px;height:310px;left:-130px;bottom:-110px}.logo{width:84px;height:84px;display:grid;place-items:center;border-radius:22px;background:#ffffff18;border:1px solid #ffffff35;font-size:30px;font-weight:800;letter-spacing:-2px}.cover .kicker{margin-top:48px;color:#9fd3ff;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:700}.cover h1{max-width:760px;margin:14px 0 20px;font-size:48px;line-height:1.08;letter-spacing:-1.5px}.cover .subtitle{max-width:650px;margin:0;font-size:20px;color:#d8ebfb}.cover-meta{margin-top:70px;padding-top:24px;border-top:1px solid #ffffff30;display:grid;grid-template-columns:1fr 1fr;gap:18px}.cover-meta span{display:block;color:#99c7e9;font-size:11px;text-transform:uppercase;letter-spacing:.1em}.cover-meta strong{display:block;margin-top:4px;font-size:15px}.content{padding:58px 66px}.toc{padding:28px;border-radius:16px;background:#f3f8fe;border:1px solid #dceafa}.toc h2{margin-top:0}.toc ol{columns:2;column-gap:45px;padding-left:22px}.toc li{padding:4px 0}.toc a{color:#0d5fb2;text-decoration:none}h1,h2,h3{color:#092f52;line-height:1.24}h2{margin:42px 0 14px;padding-bottom:9px;border-bottom:2px solid #dbe9f6;font-size:25px}h2 .n{display:inline-grid;place-items:center;width:31px;height:31px;margin-right:9px;border-radius:9px;color:#fff;background:#146bc4;font-size:15px;vertical-align:3px}h3{margin:25px 0 8px;font-size:18px}p{margin:8px 0 14px}.lead{font-size:17px;color:#405a72}.note,.warning{margin:18px 0;padding:15px 18px;border-radius:10px;border-left:4px solid #1a73c9;background:#eef7ff}.warning{border-color:#d68a00;background:#fff8e8}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}.card{padding:18px;border:1px solid #dce6ef;border-radius:12px;background:#fff}.card h3{margin:0 0 7px;font-size:16px}.card p{margin:0;color:#526a7e;font-size:13px}.flow{display:flex;align-items:stretch;gap:9px;margin:20px 0}.flow div{flex:1;padding:14px 8px;text-align:center;border-radius:9px;background:#eaf4ff;border:1px solid #cde3f8;color:#0d4f8d;font-size:12px;font-weight:700}.flow b{align-self:center;color:#7b9ab5}table{width:100%;margin:15px 0 24px;border-collapse:collapse;font-size:13px}th{padding:10px;text-align:left;color:#fff;background:#0c477b}td{padding:9px 10px;border-bottom:1px solid #dfe7ef;vertical-align:top}tr:nth-child(even) td{background:#f7faff}ul,ol{padding-left:22px}li{margin:5px 0}code{padding:2px 5px;border-radius:4px;background:#edf3f8;color:#084d89;font:12px Consolas,monospace}.check{color:#087d4f;font-weight:700}.muted{color:#60768a}.page-break{break-before:page}.footer-note{margin-top:50px;padding-top:15px;border-top:1px solid #dce6ef;color:#718599;font-size:11px}@media(max-width:700px){.report{margin:0}.cover{min-height:100vh;padding:45px 28px}.cover h1{font-size:36px}.cover-meta,.grid{grid-template-columns:1fr}.content{padding:35px 24px}.toc ol{columns:1}.flow{flex-direction:column}.flow b{transform:rotate(90deg)}}@media print{body{background:#fff}.report{max-width:none;margin:0;box-shadow:none}.cover{min-height:260mm;break-after:page}.content{padding:0}.toc{break-after:page}a{color:inherit}}
+</style>
+</head>
+<body><article class="report">
+<section class="cover">
+  <div class="kicker">Reporte técnico y funcional</div>
+  <h1 style="color: #fff;">Sistema Web Gestor de Archivos de Audio</h1>
+  <p class="subtitle">Documento integral de funcionamiento, arquitectura, módulos, seguridad, operación y mantenimiento.</p>
+  <div class="cover-meta">
+    <div><span>Institución</span><strong>Arca de Salvación Radio 95.3 FM</strong></div>
+    <div><span>Ubicación</span><strong>Puerto Plata, República Dominicana</strong></div>
+    <div><span>Versión del sistema</span><strong>1.0</strong></div>
+    <div><span>Tecnologías</span><strong>PHP 8, MySQL, HTML, CSS, Bootstrap y JavaScript</strong></div>
+    
+  </div>
+</section>
+
+<div class="content">
+<section class="toc">
+<h2>Contenido</h2>
+<ol>
+  <li><a href="#resumen">Resumen ejecutivo</a></li><li><a href="#objetivos">Objetivos</a></li>
+  <li><a href="#alcance">Alcance y usuarios</a></li><li><a href="#arquitectura">Arquitectura</a></li>
+  <li><a href="#tecnologias">Tecnologías</a></li><li><a href="#modulos">Módulos funcionales</a></li>
+  <li><a href="#flujos">Flujos de operación</a></li><li><a href="#datos">Base de datos</a></li>
+  <li><a href="#archivos">Manejo de archivos</a></li><li><a href="#seguridad">Seguridad</a></li>
+  <li><a href="#interfaz">Interfaz y experiencia</a></li><li><a href="#estructura">Estructura del proyecto</a></li>
+  <li><a href="#configuracion">Configuración e instalación</a></li><li><a href="#pruebas">Pruebas realizadas</a></li>
+  <li><a href="#mantenimiento">Mantenimiento y respaldo</a></li><li><a href="#decisiones">Decisiones técnicas</a></li>
+  <li><a href="#conclusiones">Conclusiones</a></li>
+</ol>
+</section>
+
+<section id="resumen"><h2><span class="n">1</span>Resumen ejecutivo</h2>
+<p class="lead">El Sistema Web Gestor de Archivos de Audio centraliza los recursos sonoros utilizados por Arca de Salvación Radio 95.3 FM. Permite almacenar, clasificar, buscar, reproducir y administrar audios desde un navegador, sustituyendo el uso de carpetas locales dispersas.</p>
+<p>La plataforma conserva en MySQL la información descriptiva y técnica de cada recurso, mientras los archivos binarios permanecen en un almacenamiento protegido del servidor. El acceso está controlado mediante usuarios, roles y permisos. Cada reproducción genera un evento real que alimenta el dashboard y las métricas.</p>
+<div class="note"><strong>Resultado principal:</strong> la emisora dispone de una biblioteca centralizada, trazable, segura y consultable desde computadoras, tabletas y teléfonos autorizados.</div>
+</section>
+
+<section id="objetivos"><h2><span class="n">2</span>Objetivos</h2>
+<h3>Objetivo general</h3><p>Proporcionar una aplicación web alojable en hosting PHP/MySQL que permita gestionar de forma organizada y segura los recursos de audio de la emisora.</p>
+<h3>Objetivos específicos</h3><ul>
+<li>Centralizar archivos y metadatos en una sola plataforma.</li><li>Reducir el tiempo de localización mediante búsqueda y filtros.</li>
+<li>Clasificar recursos por categorías adaptadas a la operación radial.</li><li>Evitar contenido duplicado mediante SHA-256.</li>
+<li>Controlar el acceso por roles y permisos configurables.</li><li>Reproducir audio directamente en el navegador.</li>
+<li>Producir métricas verificables basadas en eventos reales.</li><li>Permitir a cada usuario administrar su perfil y contraseña.</li>
+</ul></section>
+
+<section id="alcance"><h2><span class="n">3</span>Alcance y usuarios</h2>
+<div class="grid">
+<div class="card"><h3>Administrador</h3><p>Control completo de usuarios, roles, permisos, categorías, audios, métricas y parámetros operativos.</p></div>
+<div class="card"><h3>Usuario autorizado</h3><p>Consulta y reproducción. Puede cargar, editar, eliminar o consultar métricas según los permisos asignados.</p></div>
+</div>
+<h3>Funciones incluidas</h3><p>Inicio y cierre de sesión; administración de cuentas y roles; categorías; carga, consulta, edición, reproducción y eliminación lógica de audios; metadatos; búsqueda; filtros; prevención de duplicados; dashboard; métricas; perfil; fotografía y cambio de contraseña.</p>
+<h3>Fuera de alcance</h3><p>Streaming radial en vivo, edición o mezcla de audio, automatización de cabina, aplicación móvil nativa, facturación, CRM y funciones comerciales.</p>
+</section>
+
+<section id="arquitectura" class="page-break"><h2><span class="n">4</span>Arquitectura del sistema</h2>
+<p>La solución utiliza un patrón MVC ligero y una separación por responsabilidades. Las vistas nunca consultan directamente la base de datos. Todas las solicitudes pasan por el enrutador y los controladores, donde se verifican sesión, permisos, validaciones y reglas de negocio.</p>
+<div class="flow"><div>Navegador<br>HTML/Bootstrap/JS</div><b>→</b><div>Front Controller<br>Router</div><b>→</b><div>Controladores<br>Autorización</div><b>→</b><div>Servicios<br>Archivos y reglas</div><b>→</b><div>PDO + MySQL<br>Persistencia</div></div>
+<table><thead><tr><th>Capa</th><th>Responsabilidad</th></tr></thead><tbody>
+<tr><td>Presentación</td><td>Vistas PHP, componentes Bootstrap, formularios, tablas, sidebar y reproductor.</td></tr>
+<tr><td>Enrutamiento</td><td>Relaciona método HTTP y URL con el controlador correspondiente.</td></tr>
+<tr><td>Controladores</td><td>Coordinan solicitudes, autorización, validación y respuestas.</td></tr>
+<tr><td>Servicios</td><td>Validación y almacenamiento seguro de audio y fotografías.</td></tr>
+<tr><td>Núcleo</td><td>Conexión PDO, autenticación, CSRF, variables de entorno y renderizado.</td></tr>
+<tr><td>Persistencia</td><td>MySQL con InnoDB, claves foráneas, índices y transacciones.</td></tr>
+<tr><td>Almacenamiento</td><td>Directorios protegidos para audios, perfiles y logs.</td></tr>
+</tbody></table></section>
+
+<section id="tecnologias"><h2><span class="n">5</span>Tecnologías utilizadas</h2>
+<table><thead><tr><th>Tecnología</th><th>Uso dentro del sistema</th></tr></thead><tbody>
+<tr><td>PHP 8.3</td><td>Lógica del servidor, sesiones, permisos, validación, carga y acceso a datos.</td></tr>
+<tr><td>MySQL</td><td>Usuarios, roles, permisos, categorías, audios, metadatos e historial.</td></tr>
+<tr><td>PDO</td><td>Consultas preparadas y transacciones contra MySQL.</td></tr>
+<tr><td>HTML5</td><td>Estructura semántica de pantallas y formularios.</td></tr>
+<tr><td>CSS3</td><td>Paleta azul, sidebar adaptable, tarjetas, tablas y diseño responsive.</td></tr>
+<tr><td>Bootstrap 5.3</td><td>Cuadrícula, formularios, offcanvas, dropdowns, alertas y utilidades.</td></tr>
+<tr><td>Bootstrap Icons</td><td>Iconografía de navegación, acciones, perfiles y estados.</td></tr>
+<tr><td>JavaScript</td><td>Sidebar compacto, vista previa de foto, registro de reproducción y UX dinámica.</td></tr>
+<tr><td>Apache / MAMP</td><td>Servidor web y ambiente local de ejecución.</td></tr>
+</tbody></table>
+<p>La aplicación no requiere framework PHP ni Composer, lo cual facilita su instalación en hosting compartido.</p></section>
+
+<section id="modulos" class="page-break"><h2><span class="n">6</span>Módulos funcionales</h2>
+<div class="grid">
+<div class="card"><h3>Autenticación</h3><p>Ingreso por usuario o correo, contraseña verificada con hash, regeneración de sesión, cierre seguro y mensajes genéricos.</p></div>
+<div class="card"><h3>Dashboard</h3><p>Totales de audios, categorías, usuarios y reproducciones; distribución por categoría y archivos recientes.</p></div>
+<div class="card"><h3>Biblioteca de audio</h3><p>Listado paginado, búsqueda global, filtro por categoría, detalle técnico, reproducción, edición y eliminación lógica.</p></div>
+<div class="card"><h3>Carga de audio</h3><p>MP3/WAV, límite configurable, validación real, SHA-256, nombre aleatorio, metadatos y transacción.</p></div>
+<div class="card"><h3>Categorías</h3><p>Creación, edición, nombre único, activación y desactivación de clasificaciones.</p></div>
+<div class="card"><h3>Usuarios</h3><p>Alta, edición, búsqueda, rol, estado, teléfono y restablecimiento administrativo de contraseña.</p></div>
+<div class="card"><h3>Roles y permisos</h3><p>RBAC persistido en base de datos. Permite ampliar autorizaciones sin reprogramar el sistema.</p></div>
+<div class="card"><h3>Métricas</h3><p>Rango de fechas, tendencia diaria, audios más reproducidos, categorías con mayor uso y carga mensual.</p></div>
+<div class="card"><h3>Mi perfil</h3><p>Foto dinámica con vista previa, nombre, teléfono, correo informativo y actualización segura de contraseña.</p></div>
+<div class="card"><h3>Reproducción protegida</h3><p>Controlador autenticado, solicitudes HTTP Range y registro del primer evento de reproducción.</p></div>
+</div>
+<h3>Permisos disponibles</h3><table><thead><tr><th>Código</th><th>Acción</th></tr></thead><tbody>
+<tr><td><code>*</code></td><td>Acceso administrativo completo.</td></tr><tr><td><code>audios.ver</code></td><td>Consultar y reproducir.</td></tr>
+<tr><td><code>audios.crear</code></td><td>Registrar archivos.</td></tr><tr><td><code>audios.editar</code></td><td>Actualizar clasificación y metadatos.</td></tr>
+<tr><td><code>audios.eliminar</code></td><td>Realizar eliminación lógica.</td></tr><tr><td><code>metricas.ver</code></td><td>Consultar estadísticas completas.</td></tr>
+</tbody></table></section>
+
+<section id="flujos"><h2><span class="n">7</span>Flujos principales de operación</h2>
+<h3>Carga de audio</h3><ol><li>El usuario autorizado abre el formulario y selecciona MP3 o WAV.</li><li>Completa categoría, título y metadatos opcionales.</li><li>El servidor valida sesión, permiso, error de carga, tamaño, extensión y contenido.</li><li>Calcula SHA-256 y busca coincidencias.</li><li>Si existe, cancela e identifica el registro duplicado.</li><li>Si es válido, genera nombre aleatorio y mueve el archivo al almacenamiento.</li><li>Crea audio y metadatos dentro de una transacción.</li><li>Confirma y redirige a la biblioteca.</li></ol>
+<h3>Reproducción</h3><ol><li>El usuario abre el detalle y pulsa reproducir.</li><li>El servidor vuelve a comprobar sesión, permiso, estado y existencia física.</li><li>Entrega el contenido con soporte de rangos.</li><li>JavaScript registra un evento al primer <em>play</em>.</li><li>Las métricas incorporan el evento real.</li></ol>
+<h3>Cambio de fotografía</h3><ol><li>El usuario pulsa la foto o el icono de lápiz.</li><li>El navegador valida formato y tamaño y muestra una vista previa.</li><li>Al guardar, el servidor repite la validación mediante MIME e inspección de imagen.</li><li>Se genera un nombre aleatorio y se actualiza el perfil.</li></ol>
+<h3>Cambio de contraseña</h3><ol><li>Introduce contraseña actual, nueva y confirmación.</li><li>El servidor verifica la contraseña actual.</li><li>Valida mínimo de 8 caracteres y coincidencia.</li><li>Genera un nuevo hash y regenera el identificador de sesión.</li></ol></section>
+
+<section id="datos" class="page-break"><h2><span class="n">8</span>Diseño de base de datos</h2>
+<p>La base utiliza InnoDB, <code>utf8mb4</code>, claves foráneas, restricciones únicas e índices de búsqueda. Contiene diez tablas.</p>
+<table><thead><tr><th>Tabla</th><th>Finalidad</th><th>Relaciones relevantes</th></tr></thead><tbody>
+<tr><td>roles</td><td>Catálogo de roles y estado.</td><td>1:N usuarios; N:M permisos.</td></tr>
+<tr><td>permisos</td><td>Catálogo de capacidades del sistema.</td><td>N:M roles.</td></tr>
+<tr><td>rol_permisos</td><td>Asignación RBAC.</td><td>FK a roles y permisos.</td></tr>
+<tr><td>usuarios</td><td>Credenciales, correo, rol y estado.</td><td>FK rol; 1:1 perfil; 1:N audios.</td></tr>
+<tr><td>perfiles_usuarios</td><td>Nombre, teléfono y fotografía.</td><td>FK única a usuario.</td></tr>
+<tr><td>categorias</td><td>Clasificación de recursos.</td><td>1:N archivos de audio.</td></tr>
+<tr><td>archivos_audio</td><td>Información física/técnica, ruta y hash.</td><td>FK categoría y usuario; 1:1 metadatos.</td></tr>
+<tr><td>metadatos_audio</td><td>Título, artista, locutor, cliente y descripción.</td><td>FK única a audio.</td></tr>
+<tr><td>historial_reproducciones</td><td>Eventos que alimentan las métricas.</td><td>FK audio y usuario.</td></tr>
+<tr><td>intentos_login</td><td>Control temporal de intentos fallidos.</td><td>Identificadores e IP almacenados como hash.</td></tr>
+</tbody></table>
+<h3>Datos iniciales</h3><p>Roles: Administrador y Usuario autorizado. Categorías: Canciones, Anuncios, Cuñas, Promocionales y Programas grabados.</p>
+<h3>Integridad</h3><ul><li>Usuario y correo son únicos.</li><li>Nombre de categoría es único.</li><li>SHA-256 y nombre físico del audio son únicos.</li><li>Las relaciones conservan trazabilidad.</li><li>Los índices aceleran búsqueda, estado, fechas y métricas.</li></ul></section>
+
+<section id="archivos"><h2><span class="n">9</span>Manejo de archivos</h2>
+<table><thead><tr><th>Aspecto</th><th>Implementación</th></tr></thead><tbody>
+<tr><td>Formatos</td><td>MP3 y WAV.</td></tr><tr><td>Validación</td><td><code>finfo</code> cuando está disponible y firmas binarias estrictas como respaldo local.</td></tr>
+<tr><td>Tamaño</td><td>Configurable mediante <code>MAX_AUDIO_MB</code>.</td></tr><tr><td>Duplicidad</td><td>Hash SHA-256 calculado antes del almacenamiento definitivo.</td></tr>
+<tr><td>Nombre</td><td>40 caracteres hexadecimales aleatorios y extensión normalizada.</td></tr><tr><td>Ubicación</td><td><code>storage/audio</code> o ruta externa definida por <code>UPLOAD_DIR</code>.</td></tr>
+<tr><td>Base de datos</td><td>Guarda ruta, nombres, MIME, extensión, tamaño, duración, hash y estado; no usa BLOB.</td></tr>
+<tr><td>Entrega</td><td>Controlador protegido con soporte <code>Range</code> y disposición inline.</td></tr>
+<tr><td>Eliminación</td><td>Lógica por defecto para preservar historial.</td></tr>
+</tbody></table></section>
+
+<section id="seguridad" class="page-break"><h2><span class="n">10</span>Seguridad</h2>
+<ul>
+<li>Contraseñas protegidas mediante <code>password_hash</code> y verificadas con <code>password_verify</code>.</li>
+<li>Consultas PDO preparadas y emulación desactivada.</li><li>Regeneración del ID de sesión al autenticar y cambiar contraseña.</li>
+<li>Cookies HttpOnly y SameSite Lax; opción Secure para producción.</li><li>Token CSRF en formularios y acciones sensibles.</li>
+<li>Escape HTML centralizado para prevenir XSS.</li><li>Autorización repetida en servidor, además de ocultar acciones en la interfaz.</li>
+<li>Limitación de intentos por identificador e IP hashed durante un período configurable.</li><li>Mensajes de login genéricos para no revelar la existencia de cuentas.</li>
+<li>Validación de MIME, extensión, tamaño e imagen real.</li><li>Rutas físicas y errores SQL no se muestran en producción.</li>
+<li>Carpetas de almacenamiento protegidas contra acceso directo.</li>
+</ul>
+<div class="warning"><strong>Producción:</strong> es obligatorio activar HTTPS, configurar <code>APP_SECURE_COOKIE=true</code>, habilitar <code>fileinfo</code> y mantener <code>.env</code> fuera del repositorio público.</div></section>
+
+<section id="interfaz"><h2><span class="n">11</span>Interfaz y experiencia de usuario</h2>
+<p>La interfaz está en español y utiliza una paleta azul coherente con un entorno institucional. Es responsive y compatible con escritorio, tableta y móvil.</p>
+<ul><li>Sidebar con iconos, grupo administrativo desplegable y modo compacto persistente.</li><li>Navegación móvil mediante panel offcanvas.</li><li>Indicador visual de la sección activa y opciones condicionadas por permisos.</li><li>Menú de usuario con acceso al perfil y cierre de sesión.</li><li>Dashboard con tarjetas, barras y actividad reciente.</li><li>Tablas adaptables, búsqueda, filtros, paginación y estados vacíos.</li><li>Alertas de éxito/error y confirmaciones para acciones destructivas.</li><li>Perfil con foto circular, icono cuando no existe imagen y vista previa dinámica.</li><li>Campos de contraseña con controles de visibilidad.</li><li>Reproductor nativo con reproducción, pausa, progreso, duración y volumen.</li></ul></section>
+
+<section id="estructura"><h2><span class="n">12</span>Estructura del proyecto</h2>
+<table><thead><tr><th>Ruta</th><th>Contenido</th></tr></thead><tbody>
+<tr><td><code>app/Core</code></td><td>Autenticación, base de datos, entorno, CSRF, router y vistas.</td></tr>
+<tr><td><code>app/Controllers</code></td><td>Controladores de acceso, dashboard, audios, usuarios, roles, categorías, métricas y perfil.</td></tr>
+<tr><td><code>app/Services</code></td><td>Almacenamiento y validación de audio y fotografías.</td></tr>
+<tr><td><code>app/Views</code></td><td>Layouts y pantallas PHP.</td></tr><tr><td><code>database</code></td><td>Esquema y datos iniciales reproducibles.</td></tr>
+<tr><td><code>public</code></td><td>Front controller, CSS, JavaScript y reglas Apache.</td></tr><tr><td><code>routes</code></td><td>Definición central de rutas web.</td></tr>
+<tr><td><code>storage</code></td><td>Audios, fotos y logs protegidos.</td></tr><tr><td><code>scripts</code></td><td>Creación segura del administrador inicial.</td></tr>
+<tr><td><code>tests</code></td><td>Pruebas base automatizadas.</td></tr><tr><td><code>docs</code></td><td>Decisiones, pruebas, respaldo y este reporte.</td></tr>
+</tbody></table><p>El proyecto contiene 41 archivos PHP, una hoja CSS principal y un archivo JavaScript principal.</p></section>
+
+<section id="configuracion" class="page-break"><h2><span class="n">13</span>Configuración, instalación y despliegue</h2>
+<h3>Requisitos</h3><p>PHP 8.1+, PDO MySQL, mbstring, fileinfo recomendado, MySQL/MariaDB compatible, Apache con mod_rewrite, HTTPS y permisos de escritura en almacenamiento.</p>
+<h3>Variables relevantes</h3><table><thead><tr><th>Variable</th><th>Uso</th></tr></thead><tbody>
+<tr><td>APP_ENV / APP_URL</td><td>Entorno y URL base.</td></tr><tr><td>APP_TIMEZONE</td><td>Zona horaria del sistema.</td></tr>
+<tr><td>APP_SECURE_COOKIE</td><td>Cookie exclusiva de HTTPS.</td></tr><tr><td>DB_HOST, DB_PORT, DB_NAME</td><td>Servidor y base de datos.</td></tr>
+<tr><td>DB_USER, DB_PASS</td><td>Credenciales con privilegios mínimos.</td></tr><tr><td>UPLOAD_DIR / PROFILE_DIR</td><td>Rutas absolutas opcionales.</td></tr>
+<tr><td>MAX_AUDIO_MB / MAX_PROFILE_MB</td><td>Límites configurables.</td></tr><tr><td>LOGIN_MAX_ATTEMPTS</td><td>Número máximo de fallos.</td></tr>
+<tr><td>LOGIN_LOCK_MINUTES</td><td>Ventana de bloqueo temporal.</td></tr>
+</tbody></table>
+<h3>Procedimiento resumido</h3><ol><li>Copiar <code>.env.example</code> como <code>.env</code>.</li><li>Crear base <code>utf8mb4</code>.</li><li>Importar <code>database/schema.sql</code> y <code>database/seed.sql</code>.</li><li>Crear el administrador mediante <code>scripts/create_admin.php</code>.</li><li>Conceder escritura a las carpetas de almacenamiento.</li><li>Configurar el document root hacia <code>public</code>.</li><li>Activar HTTPS, Secure Cookie y copias de seguridad.</li></ol></section>
+
+<section id="pruebas"><h2><span class="n">14</span>Pruebas y evidencia</h2>
+<table><thead><tr><th>Comprobación</th><th>Resultado</th></tr></thead><tbody>
+<tr><td>Análisis de todos los archivos PHP</td><td class="check">0 errores</td></tr><tr><td>Hash, contraseñas, escape y extensiones</td><td class="check">OK</td></tr>
+<tr><td>Importación reproducible</td><td class="check">10 tablas, 2 roles, 5 categorías</td></tr><tr><td>Login con CSRF y sesión</td><td class="check">HTTP 200</td></tr>
+<tr><td>Módulos principales</td><td class="check">HTTP 200</td></tr><tr><td>Carga WAV válida</td><td class="check">Persistida correctamente</td></tr>
+<tr><td>Entrega parcial</td><td class="check">HTTP 206</td></tr><tr><td>Evento de reproducción</td><td class="check">Registrado</td></tr>
+<tr><td>Duplicidad</td><td class="check">Rechazada por SHA-256</td></tr><tr><td>Fixture de prueba</td><td class="check">Eliminado después de verificar</td></tr>
+</tbody></table>
+<p>También se verificaron sintaxis JavaScript, renderizado del sidebar, perfil dinámico, control de permisos y acceso a dashboard, audios, categorías, usuarios, roles, métricas y perfil.</p></section>
+
+<section id="mantenimiento"><h2><span class="n">15</span>Mantenimiento, respaldo y restauración</h2>
+<p>El respaldo debe tratar base de datos y almacenamiento como una sola unidad lógica. Un respaldo SQL sin los audios, o viceversa, es incompleto.</p>
+<h3>Política recomendada</h3><ul><li>Respaldo diario de MySQL con transacción consistente.</li><li>Compresión de <code>storage/audio</code> y <code>storage/profiles</code>.</li><li>Copia cifrada fuera del hosting.</li><li>Retención: 7 diarias, 4 semanales y 6 mensuales.</li><li>Prueba mensual de restauración.</li><li>Revisión periódica de espacio, logs, cuentas inactivas y permisos.</li></ul>
+<h3>Restauración</h3><ol><li>Poner la aplicación en mantenimiento.</li><li>Crear una base vacía e importar el SQL.</li><li>Restaurar audios y fotografías preservando nombres.</li><li>Configurar rutas y permisos.</li><li>Ejecutar pruebas de login, búsqueda, reproducción y carga.</li><li>Reabrir después de revisar logs.</li></ol></section>
+
+<section id="decisiones"><h2><span class="n">16</span>Decisiones técnicas y consideraciones</h2>
+<ul><li>Se eligió MVC ligero sin framework para compatibilidad con hosting compartido.</li><li>Se añadió RBAC persistido para ampliar permisos sin cambios extensos de código.</li><li>Se añadió control de intentos de login como requisito de seguridad.</li><li>Los binarios no se almacenan como BLOB.</li><li>La duración es editable porque el hosting no garantiza FFmpeg.</li><li><code>finfo</code> es el mecanismo principal; existe respaldo por firmas para MAMP local.</li><li>Bootstrap e iconos se sirven mediante CDN; una instalación aislada debe alojarlos localmente.</li><li>La eliminación habitual es lógica para preservar métricas y trazabilidad.</li></ul>
+<div class="note">No se incorporaron módulos ajenos al alcance, como streaming en vivo, edición de audio, facturación o aplicación móvil nativa.</div></section>
+
+<section id="conclusiones"><h2><span class="n">17</span>Conclusiones</h2>
+<p>El sistema cumple el objetivo de centralizar y controlar los recursos sonoros de la emisora. Integra persistencia real, seguridad del lado del servidor, administración configurable, reproducción protegida y métricas derivadas de eventos verificables.</p>
+<p>Su arquitectura sencilla favorece el mantenimiento y el despliegue en hosting PHP/MySQL. Para producción solo resta completar la configuración propia del proveedor: dominio, HTTPS, límites PHP, usuario MySQL mínimo, rutas externas de almacenamiento y automatización de respaldos.</p>
+<p class="footer-note">Reporte elaborado a partir de la implementación existente y su especificación técnica. No contiene contraseñas ni secretos de operación.</p>
+</section>
+</div></article></body></html>
