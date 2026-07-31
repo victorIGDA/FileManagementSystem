@@ -1,2 +1,49 @@
-<?php $editing=$category!==null;$title=$editing?'Editar categoría':'Nueva categoría'; ?><div class="page-heading"><div><p class="eyebrow">Administración</p><h1><?= $title ?></h1><p>El nombre debe ser único en el sistema.</p></div><a class="btn btn-outline-secondary" href="<?= url('/categorias') ?>">Cancelar</a></div><form class="panel form-narrow" method="post" action="<?= $editing?url('/categorias/'.$category['id_categoria'].'/editar'):url('/categorias') ?>"><?= csrf_field() ?><div class="mb-3"><label class="form-label" for="nombre">Nombre *</label><input class="form-control" id="nombre" name="nombre" maxlength="100" value="<?= old('nombre',$category['nombre']??'') ?>" required></div><div class="mb-3"><label class="form-label" for="descripcion">Descripción</label><textarea class="form-control" id="descripcion" name="descripcion" rows="4" maxlength="255"><?= old('descripcion',$category['descripcion']??'') ?></textarea></div><button class="btn btn-primary">Guardar categoría</button></form>
+<?php
+$editing = $category !== null;
+$title = $editing ? 'Editar categoría' : 'Nueva categoría';
+$action = $editing
+    ? url('/categorias/' . $category['id_categoria'] . '/editar')
+    : url('/categorias');
+?>
 
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">Administración</p>
+        <h1><?= e($title) ?></h1>
+        <p>El nombre debe ser único en el sistema.</p>
+    </div>
+    <a class="btn btn-outline-secondary" href="<?= url('/categorias') ?>">
+        Cancelar
+    </a>
+</div>
+
+<form class="panel form-narrow" method="post" action="<?= $action ?>">
+    <?= csrf_field() ?>
+
+    <div class="mb-3">
+        <label class="form-label" for="nombre">Nombre *</label>
+        <input
+            class="form-control"
+            id="nombre"
+            name="nombre"
+            maxlength="100"
+            value="<?= old('nombre', $category['nombre'] ?? '') ?>"
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="descripcion">Descripción</label>
+        <textarea
+            class="form-control"
+            id="descripcion"
+            name="descripcion"
+            rows="4"
+            maxlength="255"
+        ><?= old('descripcion', $category['descripcion'] ?? '') ?></textarea>
+    </div>
+
+    <button class="btn btn-primary">
+        Guardar categoría
+    </button>
+</form>

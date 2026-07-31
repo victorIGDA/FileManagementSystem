@@ -38,12 +38,19 @@ final class Auth
         return self::$user = $user;
     }
 
-    public static function check(): bool { return self::user() !== null; }
+    public static function check(): bool
+    {
+        return self::user() !== null;
+    }
 
     public static function can(string $permission): bool
     {
         $user = self::user();
-        return $user !== null && (in_array('*', $user['permisos'], true) || in_array($permission, $user['permisos'], true));
+        return $user !== null
+            && (
+                in_array('*', $user['permisos'], true)
+                || in_array($permission, $user['permisos'], true)
+            );
     }
 
     public static function requireLogin(): void
@@ -78,9 +85,16 @@ final class Auth
         $_SESSION = [];
         if (ini_get('session.use_cookies')) {
             $p = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000, $p['path'], $p['domain'], $p['secure'], $p['httponly']);
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $p['path'],
+                $p['domain'],
+                $p['secure'],
+                $p['httponly']
+            );
         }
         session_destroy();
     }
 }
-
