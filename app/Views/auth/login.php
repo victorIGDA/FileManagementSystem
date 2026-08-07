@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Iniciar sesión · Arca de Salvación</title>
     <link
+        rel="icon"
+        type="image/webp"
+        href="<?= url('/assets/img/favicon.webp') ?>"
+    >
+    <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >

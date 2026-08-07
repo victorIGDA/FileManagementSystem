@@ -297,6 +297,14 @@ final class AudioController
             $database->commit();
             flash('success', 'Audio actualizado correctamente.');
             redirect('/audios/' . $id);
+        } catch (InvalidArgumentException $exception) {
+            if ($database->inTransaction()) {
+                $database->rollBack();
+            }
+
+            flash('error', $exception->getMessage());
+            remember_input($_POST);
+            redirect('/audios/' . $id . '/editar');
         } catch (Throwable $exception) {
             $database->rollBack();
             error_log($exception->getMessage());
@@ -509,9 +517,23 @@ final class AudioController
     {
         $value = trim((string) ($_POST['duracion_segundos'] ?? ''));
 
-        return $value === ''
-            ? null
-            : max(0, (int) $value);
+        if ($value === '') {
+            return null;
+        }
+
+        if (ctype_digit($value)) {
+            return max(0, (int) $value);
+        }
+
+        if (!preg_match('/^(\d{2,}):([0-5]\d):([0-5]\d)$/', $value, $matches)) {
+            throw new InvalidArgumentException(
+                'La duracion debe tener el formato HH:MM:SS. Ejemplo: 01:25:30.'
+            );
+        }
+
+        return ((int) $matches[1] * 3600)
+            + ((int) $matches[2] * 60)
+            + (int) $matches[3];
     }
 
     private function metadataParams(int $audioId): array

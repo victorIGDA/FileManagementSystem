@@ -12,6 +12,17 @@ $selectedCategory = (int) (
     ?? $audio['id_categoria']
     ?? 0
 );
+$durationValue = '';
+
+if ($editing && ($audio['duracion_segundos'] ?? null) !== null) {
+    $seconds = (int) $audio['duracion_segundos'];
+    $durationValue = sprintf(
+        '%02d:%02d:%02d',
+        intdiv($seconds, 3600),
+        intdiv($seconds % 3600, 60),
+        $seconds % 60
+    );
+}
 ?>
 
 <div class="page-heading">
@@ -148,19 +159,24 @@ $selectedCategory = (int) (
 
         <div class="col-md-4">
             <label class="form-label" for="duracion_segundos">
-                Duración (segundos)
+                Duración (HH:MM:SS)
             </label>
             <input
                 class="form-control"
-                type="number"
-                min="0"
+                type="text"
                 id="duracion_segundos"
                 name="duracion_segundos"
+                inputmode="numeric"
+                pattern="[0-9]{2,}:[0-5][0-9]:[0-5][0-9]"
+                placeholder="00:03:45"
                 value="<?= old(
                     'duracion_segundos',
-                    (string) ($audio['duracion_segundos'] ?? '')
+                    $durationValue
                 ) ?>"
             >
+            <div class="form-text">
+                Escribe horas, minutos y segundos. Ejemplo: 01:25:30.
+            </div>
         </div>
 
         <div class="col-md-4">

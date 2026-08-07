@@ -21,6 +21,11 @@ $isAdminSection = str_contains($current, '/categorias')
         content="<?= e(App\Core\Csrf::token()) ?>"
     >
     <title><?= e($pageTitle) ?> · Arca de Salvación</title>
+    <link
+        rel="icon"
+        type="image/webp"
+        href="<?= url('/assets/img/favicon.webp') ?>"
+    >
     <script>
         try {
             if (localStorage.getItem('sidebarCompact') === 'true') {
