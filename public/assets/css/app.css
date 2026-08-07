@@ -1033,8 +1033,11 @@ body {
 }
 @media (max-width: 991.98px) {
     .sidebar {
+        --bs-offcanvas-width: min(310px, 88vw);
         position: fixed;
         width: min(310px, 88vw);
+        z-index: var(--bs-offcanvas-zindex, 1045);
+        transition: transform .3s ease-in-out;
     }
     .main, html.sidebar-compact .main {
         margin-left: 0;

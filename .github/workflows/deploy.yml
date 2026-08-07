@@ -1,0 +1,61 @@
+name: Deploy PHP app
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate PHP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: fileinfo, mbstring, pdo_mysql
+
+      - name: Create CI environment file
+        run: cp .env.example .env
+
+      - name: Run smoke tests
+        run: php tests/smoke.php
+
+      - name: Check PHP syntax
+        run: |
+          find . \
+            -path './.git' -prune -o \
+            -name '*.php' -print0 \
+            | xargs -0 -n1 php -l
+
+  deploy:
+    name: Deploy by FTP
+    runs-on: ubuntu-latest
+    needs: validate
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.env
+            **/docs/**
+            **/tests/**
