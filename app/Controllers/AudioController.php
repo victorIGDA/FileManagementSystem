@@ -7,6 +7,7 @@ use App\Core\Auth;
 use App\Core\Database;
 use App\Core\View;
 use App\Services\AudioStorage;
+use DateTime;
 use InvalidArgumentException;
 use Throwable;
 
@@ -21,10 +22,16 @@ final class AudioController
         $database = Database::connection();
         $query = trim((string) ($_GET['q'] ?? ''));
         $category = (int) ($_GET['categoria'] ?? 0);
+        $dateFrom = $this->dateFilter($_GET['fecha_desde'] ?? null);
+        $dateTo = $this->dateFilter($_GET['fecha_hasta'] ?? null);
         $page = max(1, (int) ($_GET['pagina'] ?? 1));
         $offset = ($page - 1) * self::PAGE_SIZE;
         $conditions = ['a.estado = 1'];
         $parameters = [];
+
+        if ($dateFrom !== '' && $dateTo !== '' && $dateFrom > $dateTo) {
+            [$dateFrom, $dateTo] = [$dateTo, $dateFrom];
+        }
 
         if ($query !== '') {
             $conditions[] = '(
@@ -42,6 +49,16 @@ final class AudioController
         if ($category) {
             $conditions[] = 'a.id_categoria = ?';
             $parameters[] = $category;
+        }
+
+        if ($dateFrom !== '') {
+            $conditions[] = 'a.fecha_registro >= ?';
+            $parameters[] = $dateFrom . ' 00:00:00';
+        }
+
+        if ($dateTo !== '') {
+            $conditions[] = 'a.fecha_registro <= ?';
+            $parameters[] = $dateTo . ' 23:59:59';
         }
 
         $conditionSql = implode(' AND ', $conditions);
@@ -87,6 +104,8 @@ final class AudioController
             'categories' => $categories,
             'q' => $query,
             'category' => $category,
+            'dateFrom' => $dateFrom,
+            'dateTo' => $dateTo,
             'page' => $page,
             'pages' => $pages,
             'total' => $total,
@@ -491,6 +510,15 @@ final class AudioController
                 'Selecciona una categoría activa.'
             );
         }
+    }
+
+    private function dateFilter(mixed $value): string
+    {
+        $date = DateTime::createFromFormat('Y-m-d', (string) $value);
+
+        return $date && $date->format('Y-m-d') === $value
+            ? $date->format('Y-m-d')
+            : '';
     }
 
     private function validateMetadata(): void

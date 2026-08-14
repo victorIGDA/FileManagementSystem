@@ -610,12 +610,16 @@ body {
 }
 .filter-bar {
     display: flex;
+    flex-wrap: wrap;
     gap: .75rem;
     align-items: end;
     margin-bottom: 1.25rem;
 }
 .filter-bar > div {
     min-width: 180px;
+}
+.filter-bar .date-filter {
+    min-width: 150px;
 }
 .table > :not(caption) > * > * {
     padding: .9rem .75rem;

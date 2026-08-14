@@ -32,7 +32,8 @@
         </div>
 
         <div>
-            <label class="visually-hidden" for="categoria">
+            
+            <label class="form-label" for="categoria">
                 Categoría
             </label>
             <select
@@ -54,9 +55,35 @@
             </select>
         </div>
 
+        <div class="date-filter">
+            <label class="form-label" for="fecha_desde">
+                Desde
+            </label>
+            <input
+                class="form-control"
+                id="fecha_desde"
+                name="fecha_desde"
+                type="date"
+                value="<?= e($dateFrom) ?>"
+            >
+        </div>
+
+        <div class="date-filter">
+            <label class="form-label" for="fecha_hasta">
+                Hasta
+            </label>
+            <input
+                class="form-control"
+                id="fecha_hasta"
+                name="fecha_hasta"
+                type="date"
+                value="<?= e($dateTo) ?>"
+            >
+        </div>
+
         <button class="btn btn-dark">Filtrar</button>
 
-        <?php if ($q !== '' || $category): ?>
+        <?php if ($q !== '' || $category || $dateFrom !== '' || $dateTo !== ''): ?>
             <a class="btn btn-outline-secondary" href="<?= url('/audios') ?>">
                 Limpiar
             </a>
@@ -147,6 +174,8 @@
                     $pageQuery = http_build_query([
                         'q' => $q,
                         'categoria' => $category,
+                        'fecha_desde' => $dateFrom,
+                        'fecha_hasta' => $dateTo,
                         'pagina' => $pageNumber,
                     ]);
                     ?>
