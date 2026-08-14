@@ -56,34 +56,22 @@
         </div>
 
         <div class="date-filter">
-            <label class="form-label" for="fecha_desde">
-                Desde
+            <label class="form-label" for="fecha">
+                Fecha (dia o mes)
             </label>
             <input
                 class="form-control"
-                id="fecha_desde"
-                name="fecha_desde"
-                type="date"
-                value="<?= e($dateFrom) ?>"
-            >
-        </div>
-
-        <div class="date-filter">
-            <label class="form-label" for="fecha_hasta">
-                Hasta
-            </label>
-            <input
-                class="form-control"
-                id="fecha_hasta"
-                name="fecha_hasta"
-                type="date"
-                value="<?= e($dateTo) ?>"
+                id="fecha"
+                name="fecha"
+                value="<?= e($date) ?>"
+                placeholder="AAAA-MM-DD o AAAA-MM"
+                title="Usa AAAA-MM-DD para un dia exacto o AAAA-MM para un mes completo"
             >
         </div>
 
         <button class="btn btn-dark">Filtrar</button>
 
-        <?php if ($q !== '' || $category || $dateFrom !== '' || $dateTo !== ''): ?>
+        <?php if ($q !== '' || $category || $date !== ''): ?>
             <a class="btn btn-outline-secondary" href="<?= url('/audios') ?>">
                 Limpiar
             </a>
@@ -174,8 +162,7 @@
                     $pageQuery = http_build_query([
                         'q' => $q,
                         'categoria' => $category,
-                        'fecha_desde' => $dateFrom,
-                        'fecha_hasta' => $dateTo,
+                        'fecha' => $date,
                         'pagina' => $pageNumber,
                     ]);
                     ?>

@@ -22,16 +22,12 @@ final class AudioController
         $database = Database::connection();
         $query = trim((string) ($_GET['q'] ?? ''));
         $category = (int) ($_GET['categoria'] ?? 0);
-        $dateFrom = $this->dateFilter($_GET['fecha_desde'] ?? null);
-        $dateTo = $this->dateFilter($_GET['fecha_hasta'] ?? null);
+        $date = trim((string) ($_GET['fecha'] ?? ''));
+        $dateRange = $this->dateRange($date);
         $page = max(1, (int) ($_GET['pagina'] ?? 1));
         $offset = ($page - 1) * self::PAGE_SIZE;
         $conditions = ['a.estado = 1'];
         $parameters = [];
-
-        if ($dateFrom !== '' && $dateTo !== '' && $dateFrom > $dateTo) {
-            [$dateFrom, $dateTo] = [$dateTo, $dateFrom];
-        }
 
         if ($query !== '') {
             $conditions[] = '(
@@ -51,14 +47,10 @@ final class AudioController
             $parameters[] = $category;
         }
 
-        if ($dateFrom !== '') {
-            $conditions[] = 'a.fecha_registro >= ?';
-            $parameters[] = $dateFrom . ' 00:00:00';
-        }
-
-        if ($dateTo !== '') {
-            $conditions[] = 'a.fecha_registro <= ?';
-            $parameters[] = $dateTo . ' 23:59:59';
+        if ($dateRange) {
+            $conditions[] = 'a.fecha_registro >= ? AND a.fecha_registro < ?';
+            $parameters[] = $dateRange['start'];
+            $parameters[] = $dateRange['end'];
         }
 
         $conditionSql = implode(' AND ', $conditions);
@@ -104,8 +96,7 @@ final class AudioController
             'categories' => $categories,
             'q' => $query,
             'category' => $category,
-            'dateFrom' => $dateFrom,
-            'dateTo' => $dateTo,
+            'date' => $date,
             'page' => $page,
             'pages' => $pages,
             'total' => $total,
@@ -512,13 +503,46 @@ final class AudioController
         }
     }
 
-    private function dateFilter(mixed $value): string
+    private function dateRange(string $value): ?array
     {
-        $date = DateTime::createFromFormat('Y-m-d', (string) $value);
+        $value = trim($value);
 
-        return $date && $date->format('Y-m-d') === $value
-            ? $date->format('Y-m-d')
-            : '';
+        if ($value === '') {
+            return null;
+        }
+
+        $normalized = null;
+        $endModifier = '+1 day';
+
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+            $normalized = $value;
+        } elseif (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $matches)) {
+            $normalized = "{$matches[3]}-{$matches[2]}-{$matches[1]}";
+        } elseif (preg_match('/^\d{4}-\d{2}$/', $value)) {
+            $normalized = $value . '-01';
+            $endModifier = '+1 month';
+        } elseif (preg_match('/^(\d{2})\/(\d{4})$/', $value, $matches)) {
+            $normalized = "{$matches[2]}-{$matches[1]}-01";
+            $endModifier = '+1 month';
+        }
+
+        if ($normalized === null) {
+            return null;
+        }
+
+        $date = DateTime::createFromFormat('!Y-m-d', $normalized);
+
+        if (!$date || $date->format('Y-m-d') !== $normalized) {
+            return null;
+        }
+
+        $end = clone $date;
+        $end->modify($endModifier);
+
+        return [
+            'start' => $date->format('Y-m-d 00:00:00'),
+            'end' => $end->format('Y-m-d 00:00:00'),
+        ];
     }
 
     private function validateMetadata(): void
